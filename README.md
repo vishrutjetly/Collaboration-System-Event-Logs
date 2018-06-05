@@ -10,6 +10,7 @@ This module works as a middleware in Django project and captures and filters the
 <p>To setup this module with the Collaboration system, perform the follwing steps:</p>
 1. copy the 'eventlog' folder into the root of the main Django project.
 2. go to project's `settings.py` and in the set of the middlewares add following line:
+
 ```python
 MIDDLE_WARE = [
 ...
