@@ -54,5 +54,13 @@ SERVER_CONF = {
 
 ```
 
+##  Debugging and Logging
+
+Debugging module is defined in utils.py and enables 5 levels of logging along with some color customizations for better viewing.
+
+1. To enable debugging go to `eventlog/main/settings.py`.
+2. Set `DEBUG = True`
+
+
 
 
