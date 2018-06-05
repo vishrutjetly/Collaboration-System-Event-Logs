@@ -11,8 +11,6 @@ services:
       MYSQL_PASSWORD: django
     ports:
       - "3306:3306"
-    networks:
-      - elk
   web:
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
@@ -20,8 +18,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    networks:
-      - elk
+      - logstash
+      
   elasticsearch:
     build:
       context: elasticsearch/
@@ -32,9 +30,7 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-
+ 
   logstash:
     build:
       context: logstash/
@@ -45,8 +41,6 @@ services:
       - "5000:5000"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
     depends_on:
       - elasticsearch
 
@@ -57,12 +51,5 @@ services:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
-    networks:
-      - elk
     depends_on:
       - elasticsearch
-
-networks:
-
-  elk:
-    driver: bridge
