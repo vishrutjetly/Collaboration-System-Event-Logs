@@ -14,7 +14,7 @@ This module works as a middleware in Django project and captures and filters the
 ```python
 MIDDLE_WARE = [
 ...
-\'evenlog.middleware.Middleware\'
+'evenlog.middleware.Middleware'
 ]
 ```
 
