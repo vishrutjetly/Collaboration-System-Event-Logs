@@ -20,13 +20,24 @@ MIDDLE_WARE = [
 
 And, thats all, you are done!
 
-## Setting up with elk stack
+## Setting up ELK Stack with docker
 
-1. Setup up your elk to listen from an IP an Port e.g 0.0.0.0 for allowing all hosts and port no. say 8080
+1. Place elasticsearch, logstash, kibana folders of evelog-Docker in the Collaboration-System repository.
 
-2. go to `eventlog/main/settings.py` and change the value of `LOG_TYPE` to `TOSERVER`.
+2. Replace the docker-compose.yml file of Collaboration-System repository with the evelog-Docker's docker-compose.yml.
 
-3. setup the proxy if required as described later.
+3. Go to `eventlog/main/settings.py` and change address and port as follows:
+```python
+SERVER_CONF = {
+		...,
+		"address": "logstash",
+                "port": 5000,
+}
+```
+4. Run the following commands inside the Collaboration-System repository:
+```docker-compose build
+   docker-compose up
+```
 
 ### Configuring the proxy
 
@@ -37,21 +48,21 @@ And, thats all, you are done!
 SERVER_CONF = {
 		...,
 
-        "proxies": {
-            "http": "http://proxy.cse.iitb.ac.in:80",
-            "https": "https://proxy.cse.iitb.ac.in:80",
-            "ftp": "ftp://proxy.cse.iitb.ac.in:80",
-        },
-	}
+              "proxies": {
+                    "http": "http://proxy.cse.iitb.ac.in:80",
+                    "https": "https://proxy.cse.iitb.ac.in:80",
+                    "ftp": "ftp://proxy.cse.iitb.ac.in:80",
+              }
+}
 ```
 4. To add authentication for proxy add follwowing to `SERVER_CONF` else remove it:
 ```python
 SERVER_CONF = {
 		...,
 		"proxy_auth": {
-            "username": "<your-proxy-authentication-name>",
-            "password": "<your-proxy-authentication-password>"
-            }
+                         "username": "<your-proxy-authentication-name>",
+                         "password": "<your-proxy-authentication-password>"
+                }
 	
 }
 
