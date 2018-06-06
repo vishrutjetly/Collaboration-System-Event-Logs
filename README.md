@@ -32,10 +32,12 @@ SERVER_CONF = {
 		...,
 		"address": "logstash",
                 "port": 5000,
+		...,
 }
 ```
 4. Run the following commands inside the Collaboration-System repository:
-```docker-compose build
+```
+   docker-compose build
    docker-compose up
 ```
 
